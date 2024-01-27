@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <f:metadata>
+            <f:viewAction action="#{studentBean.chargerListeEtudiant}" />
+        </f:metadata>
+
+        <h:head>
+            <title>Liste des étudiants</title>
+        </h:head>
+
+        <h:body>
+            <h1>Liste des étudiants</h1>
+            
+            <p:commandButton value="Ajouter un étudiant" action="addEtudiant.xhtml" />
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Ville</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="#{studentBean.listeEtudiant}" var="etudiant">
+                        <tr>
+                            <td>#{etudiant.id}</td>
+                            <td>#{etudiant.nom}</td>
+                            <td>#{etudiant.prenom}</td>
+                            <td>#{etudiant.ville}</td>
+                            <td>
+                            	<h:commandButton value="Modifier" action="#{studentBean.modifierEtudiant(etudiant.id)}" />
+                            	<h:commandButton value="Supprimer" action="#{studentBean.supprimerEtudiant(etudiant.id)}" />
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </h:body>
+    </ui:composition>
+</html>
